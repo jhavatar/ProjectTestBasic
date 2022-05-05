@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/main_fragment">
+
+    <fragment android:name="io.chthonic.projecttestbasic.presentation.main.MainFragment"
+        android:id="@+id/main_fragment"
+        android:label="Main fragment"
+        tools:layout="@layout/main_fragment"
+        >
+        <action
+            android:id="@+id/action_main_fragment_to_image_fragment"
+            app:destination="@id/image_fragment" />
+    </fragment>
+
+    <fragment android:name="io.chthonic.projecttestbasic.presentation.image.ImageFragment"
+        android:id="@+id/image_fragment"
+        android:label="Image fragment"
+        tools:layout="@layout/image_fragment"
+        >
+        <argument
+            android:name="imageUrl"
+            app:argType="string"
+            android:defaultValue="@null"
+            app:nullable="true"/>
+    </fragment>
+
+</navigation>
