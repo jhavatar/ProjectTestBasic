@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.chthonic.projecttestbasic.domain.data.DogImageRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -39,4 +40,8 @@ class DataSingletonModule {
         .baseUrl("https://dog.ceo/api/")
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
+
+    @Provides
+    @Singleton
+    fun provideDogImageRepository(impl: DogImageRepositoryImpl): DogImageRepository = impl
 }

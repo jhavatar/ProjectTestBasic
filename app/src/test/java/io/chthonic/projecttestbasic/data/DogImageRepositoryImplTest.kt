@@ -10,7 +10,7 @@ import org.mockito.kotlin.mock
 import retrofit2.Retrofit
 import kotlin.test.assertEquals
 
-class DogImageRepositoryTest {
+class DogImageRepositoryImplTest {
 
     val message = "foo"
     val dogImageResult = DogImageResult(
@@ -23,7 +23,7 @@ class DogImageRepositoryTest {
     val retrofit: Retrofit = mock {
         on { create(DogImageApi::class.java) } doReturn dogImageApi
     }
-    val tested =  DogImageRepository(retrofit)
+    val tested =  DogImageRepositoryImpl(retrofit)
 
     @Test
     fun `when DogImageResult then return message as url string`() = runTest {
