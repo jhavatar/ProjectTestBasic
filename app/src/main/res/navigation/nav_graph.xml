@@ -12,7 +12,11 @@
         >
         <action
             android:id="@+id/action_main_fragment_to_image_fragment"
-            app:destination="@id/image_fragment" />
+            app:destination="@id/image_fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
 
     <fragment android:name="io.chthonic.projecttestbasic.presentation.image.ImageFragment"

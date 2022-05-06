@@ -33,7 +33,7 @@ class ImageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted {
             viewModel.imageUrlToShow.collect { imageUrl ->
                 if (imageUrl != null) {
                     binding.imageview.load(imageUrl)

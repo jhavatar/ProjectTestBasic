@@ -2,10 +2,13 @@ package io.chthonic.projecttestbasic.presentation.main
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.chthonic.projecttestbasic.domain.GetDogImageUsecase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,7 +37,11 @@ class MainViewModel @Inject constructor(
             _loadingIsVisible.value = true
             getDogImageUsecase.execute().let { dogImage ->
                 _navigate.value = NavigationTarget.ImageScreen(dogImage.url)
-                _loadingIsVisible.value = false
+                viewModelScope.launch {
+                    // prevent button displaying before navigation completed
+                    delay(100)
+                    _loadingIsVisible.emit(false)
+                }
             }
         } catch (e: Exception) {
             Log.e(MainViewModel::class.java.simpleName, "getDogImageUsecase failed", e)
