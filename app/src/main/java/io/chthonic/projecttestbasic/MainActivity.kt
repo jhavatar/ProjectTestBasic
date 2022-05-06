@@ -1,9 +1,8 @@
 package io.chthonic.projecttestbasic
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
-import io.chthonic.projecttestbasic.presentation.main.MainFragment
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

@@ -1,6 +1,5 @@
 package io.chthonic.projecttestbasic.presentation.image
 
-import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
