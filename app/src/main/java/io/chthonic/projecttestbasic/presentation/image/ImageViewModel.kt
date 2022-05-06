@@ -10,11 +10,11 @@ import javax.inject.Inject
 @HiltViewModel
 class ImageViewModel @Inject constructor() : ViewModel() {
 
-    var _imageUrlToShow = MutableStateFlow<String?>(null)
+    private val _imageUrlToShow = MutableStateFlow<String?>(null)
     val imageUrlToShow: StateFlow<String?>
         get() = _imageUrlToShow
 
-    fun onCreate(arguments: Bundle?) {
-        _imageUrlToShow.value = arguments?.getString("imageUrl", null)
+    fun onCreate(imageUrlArgument: String?) {
+        _imageUrlToShow.value = imageUrlArgument
     }
 }
