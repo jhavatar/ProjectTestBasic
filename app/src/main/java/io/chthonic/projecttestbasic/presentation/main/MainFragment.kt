@@ -52,7 +52,7 @@ class MainFragment : Fragment() {
                 viewModel.onNavigationObserved()
             }
         }
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenStarted {
             viewModel.loadingIsVisible.collect { isLoadingVisible ->
                 Log.v("D3V", " loadingIsVisible = $isLoadingVisible")
                 binding.loadingView.visibility = if (isLoadingVisible) View.VISIBLE else View.GONE
