@@ -39,7 +39,6 @@ class MainFragment : Fragment() {
 
         lifecycleScope.launchWhenStarted {
             viewModel.navigate.collect { navTarget ->
-                Log.v("D3V", " navigate = $navTarget")
                 when (navTarget) {
                     is MainViewModel.NavigationTarget.ImageScreen -> {
                         val action = MainFragmentDirections.actionMainFragmentToImageFragment()
@@ -54,7 +53,6 @@ class MainFragment : Fragment() {
         }
         lifecycleScope.launchWhenStarted {
             viewModel.loadingIsVisible.collect { isLoadingVisible ->
-                Log.v("D3V", " loadingIsVisible = $isLoadingVisible")
                 binding.loadingView.visibility = if (isLoadingVisible) View.VISIBLE else View.GONE
                 binding.imageButton.visibility = if (isLoadingVisible) View.GONE else View.VISIBLE
             }

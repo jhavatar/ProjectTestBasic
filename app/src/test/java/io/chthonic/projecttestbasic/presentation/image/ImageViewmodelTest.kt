@@ -1,22 +1,24 @@
 package io.chthonic.projecttestbasic.presentation.image
 
+import androidx.lifecycle.SavedStateHandle
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
 import kotlin.test.assertEquals
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class ImageViewmodelTest {
-    val tested = ImageViewModel()
+    val savedState: SavedStateHandle = mock {
+        on { get<String>("imageUrl") }  doReturn "foo"
+    }
+    val tested = ImageViewModel(savedState)
 
     @Test
-    fun `when onCreate is called with valid param then imageUrlToShow state is updated`() =
+    fun `when initialize with valid param then imageUrlToShow state is updated`() =
         runTest {
-            // given
-            val argument = "foo"
-
-            // when
-            tested.onCreate(argument)
-
-            // then
+            // when / then
             assertEquals("foo", tested.imageUrlToShow.value)
         }
 }

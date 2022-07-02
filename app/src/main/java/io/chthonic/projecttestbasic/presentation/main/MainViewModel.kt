@@ -8,6 +8,7 @@ import io.chthonic.projecttestbasic.domain.GetDogImageUsecase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,29 +23,31 @@ class MainViewModel @Inject constructor(
 
     private val _loadingIsVisible = MutableStateFlow<Boolean>(false)
     val loadingIsVisible: StateFlow<Boolean>
-        get() = _loadingIsVisible
+        get() = _loadingIsVisible.asStateFlow()
 
     private val _navigate = MutableStateFlow<NavigationTarget?>(null)
     val navigate: StateFlow<NavigationTarget?>
-        get() = _navigate
+        get() = _navigate.asStateFlow()
 
     fun onNavigationObserved() {
         _navigate.value = null
     }
 
-    suspend fun onImageButtonClicked() {
-        try {
-            _loadingIsVisible.value = true
-            getDogImageUsecase.execute().let { dogImage ->
-                _navigate.value = NavigationTarget.ImageScreen(dogImage.url)
-                viewModelScope.launch {
-                    // prevent button displaying before navigation completed
-                    delay(100)
-                    _loadingIsVisible.emit(false)
+    fun onImageButtonClicked() {
+        viewModelScope.launch {
+            try {
+                _loadingIsVisible.value = true
+                getDogImageUsecase.execute().let { dogImage ->
+                    _navigate.value = NavigationTarget.ImageScreen(dogImage.url)
+                    viewModelScope.launch {
+                        // prevent button displaying before navigation completed
+                        delay(100)
+                        _loadingIsVisible.emit(false)
+                    }
                 }
+            } catch (e: Exception) {
+                Log.e(MainViewModel::class.java.simpleName, "getDogImageUsecase failed", e)
             }
-        } catch (e: Exception) {
-            Log.e(MainViewModel::class.java.simpleName, "getDogImageUsecase failed", e)
         }
     }
 }
