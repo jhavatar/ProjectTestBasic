@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import io.chthonic.projecttestbasic.databinding.ImageFragmentBinding
@@ -17,12 +16,6 @@ class ImageFragment : Fragment() {
     private val viewModel: ImageViewModel by viewModels()
 
     lateinit var binding: ImageFragmentBinding
-    private val args : ImageFragmentArgs by navArgs()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.onCreate(imageUrlArgument = args.imageUrl)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
