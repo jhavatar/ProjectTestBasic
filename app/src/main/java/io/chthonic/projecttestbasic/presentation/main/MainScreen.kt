@@ -14,6 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -56,6 +59,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel(), navController: NavCon
     }
 }
 
+@Preview
 @Composable
 fun MainProgress() {
     Dialog(
@@ -73,8 +77,11 @@ fun MainProgress() {
     }
 }
 
+@Preview
 @Composable
-fun MainContent(onClick: () -> Unit) {
+fun MainContent(
+    @PreviewParameter(OnCLickParameterProvider::class) onClick: () -> Unit
+) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -87,4 +94,8 @@ fun MainContent(onClick: () -> Unit) {
             Text(stringResource(R.string.dog_button))
         }
     }
+}
+
+class OnCLickParameterProvider : PreviewParameterProvider<() -> Unit> {
+    override val values = sequenceOf({})
 }

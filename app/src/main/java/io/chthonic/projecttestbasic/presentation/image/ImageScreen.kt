@@ -16,12 +16,12 @@ fun ImageScreen(viewModel: ImageViewModel = hiltViewModel()) {
     ImageScreenImage(
         viewModel.imageUrlToShow.collectAsStateLifecycleAware(
             initial = viewModel.imageUrlToShow.value
-        ).value
+        ).value ?: ""
     )
 }
 
 @Composable
-fun ImageScreenImage(url: String? = "") {
+fun ImageScreenImage(url: String) {
     AsyncImage(
         model = url,
         contentDescription = null,
