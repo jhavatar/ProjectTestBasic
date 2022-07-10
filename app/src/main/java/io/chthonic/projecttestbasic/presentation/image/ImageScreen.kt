@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewModelScope
 import coil.compose.AsyncImage
 import io.chthonic.projecttestbasic.presentation.ktx.collectAsStateLifecycleAware
 
@@ -15,13 +16,14 @@ import io.chthonic.projecttestbasic.presentation.ktx.collectAsStateLifecycleAwar
 fun ImageScreen(viewModel: ImageViewModel = hiltViewModel()) {
     ImageScreenImage(
         viewModel.imageUrlToShow.collectAsStateLifecycleAware(
-            initial = viewModel.imageUrlToShow.value
-        ).value
+            initial = viewModel.imageUrlToShow.value,
+            scope = viewModel.viewModelScope
+        ).value ?: ""
     )
 }
 
 @Composable
-fun ImageScreenImage(url: String? = "") {
+private fun ImageScreenImage(url: String) {
     AsyncImage(
         model = url,
         contentDescription = null,
