@@ -24,9 +24,8 @@ import androidx.core.os.bundleOf
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
-import io.chthonic.projecttestbasic.Destination
 import io.chthonic.projecttestbasic.R
-import io.chthonic.projecttestbasic.presentation.image.ImageViewModel
+import io.chthonic.projecttestbasic.presentation.Destination
 import io.chthonic.projecttestbasic.presentation.ktx.collectAsStateLifecycleAware
 import io.chthonic.projecttestbasic.presentation.ktx.navigateWithObject
 import io.chthonic.projecttestbasic.presentation.main.MainViewModel.NavigationTarget.ImageScreen
@@ -47,7 +46,9 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel(), navController: NavCon
             is ImageScreen -> {
                 navController.navigateWithObject(
                     Destination.Image.route,
-                    arguments = bundleOf(ImageViewModel.IMAGE_URL_KEY to navTarget.url)
+                    arguments = bundleOf(
+                        Destination.Image.ARGUMENT_KEY to navTarget.url
+                    )
                 )
             }
         }
@@ -61,7 +62,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel(), navController: NavCon
 
 @Preview
 @Composable
-fun MainProgress() {
+private fun MainProgress() {
     Dialog(
         onDismissRequest = { },
         properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false)
@@ -79,7 +80,7 @@ fun MainProgress() {
 
 @Preview
 @Composable
-fun MainContent(
+private fun MainContent(
     @PreviewParameter(OnCLickParameterProvider::class) onClick: () -> Unit
 ) {
     Box(
@@ -96,6 +97,6 @@ fun MainContent(
     }
 }
 
-class OnCLickParameterProvider : PreviewParameterProvider<() -> Unit> {
+private class OnCLickParameterProvider : PreviewParameterProvider<() -> Unit> {
     override val values = sequenceOf({})
 }
