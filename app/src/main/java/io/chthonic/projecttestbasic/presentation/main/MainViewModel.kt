@@ -17,11 +17,11 @@ class MainViewModel @Inject constructor(
     private val getDogImageUsecase: GetDogImageUsecase
 ) : ViewModel() {
 
-    sealed class NavigationTarget() {
+    sealed class NavigationTarget {
         data class ImageScreen(val url: String) : NavigationTarget()
     }
 
-    private val _loadingIsVisible = MutableStateFlow<Boolean>(false)
+    private val _loadingIsVisible = MutableStateFlow(false)
     val loadingIsVisible: StateFlow<Boolean>
         get() = _loadingIsVisible.asStateFlow()
 

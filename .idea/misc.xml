@@ -13,6 +13,10 @@
         <entry key="../../../../layout/compose-model-1657466533024.xml" value="0.21184258918720117" />
         <entry key="../../../../layout/compose-model-1657490126834.xml" value="0.12962962962962962" />
         <entry key="../../../../layout/compose-model-1657490941436.xml" value="0.509090909090909" />
+        <entry key="../../../../layout/compose-model-1657491860991.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1658070361831.xml" value="0.11388888888888889" />
+        <entry key="../../../../layout/compose-model-1660760357227.xml" value="0.19722222222222222" />
+        <entry key="../../../../layout/compose-model-1660761437868.xml" value="0.7745454545454545" />
         <entry key="app/src/main/res/layout/image_fragment.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.22" />
@@ -20,7 +24,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
