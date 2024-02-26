@@ -1,6 +1,5 @@
 package io.chthonic.projecttestbasic.domain
 
-import io.chthonic.projecttestbasic.data.DogImageRepository
 import javax.inject.Inject
 
 class GetDogImageUsecase @Inject constructor(

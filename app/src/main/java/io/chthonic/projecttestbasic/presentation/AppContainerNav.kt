@@ -24,8 +24,8 @@ fun AppContainerNavHost(
 }
 
 sealed class Destination(val route: String) {
-    object Main : Destination("main")
-    object Image : Destination("image") {
+    data object Main : Destination("main")
+    data object Image : Destination("image") {
         const val ARGUMENT_KEY = "imageUrl"
     }
 }

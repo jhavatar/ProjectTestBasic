@@ -10,7 +10,7 @@ fun <T> NavController.setNavigationResult(route: String? = null, key: String, re
     if (route == null) {
         previousBackStackEntry?.savedStateHandle?.set(key, result)
     } else {
-        getBackStackEntry(route).savedStateHandle.set(key, result)
+        getBackStackEntry(route).savedStateHandle[key] = result
     }
 }
 

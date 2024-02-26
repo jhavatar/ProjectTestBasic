@@ -2,7 +2,6 @@ package io.chthonic.projecttestbasic.data
 
 import io.chthonic.projecttestbasic.data.api.DogImageApi
 import io.chthonic.projecttestbasic.data.model.DogImageResult
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -11,8 +10,7 @@ import org.mockito.kotlin.mock
 import retrofit2.Retrofit
 import kotlin.test.assertEquals
 
-@OptIn(ExperimentalCoroutinesApi::class)
-class DogImageRepositoryTest {
+internal class RetrofitDogImageRepositoryTest {
 
     val message = "foo"
     val dogImageResult = DogImageResult(
@@ -25,7 +23,7 @@ class DogImageRepositoryTest {
     val retrofit: Retrofit = mock {
         on { create(DogImageApi::class.java) } doReturn dogImageApi
     }
-    val tested =  DogImageRepository(retrofit)
+    val tested = RetrofitDogImageRepository(retrofit)
 
     @Test
     fun `when DogImageResult then return message as url string`() = runTest {

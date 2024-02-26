@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import io.chthonic.projecttestbasic.databinding.MainFragmentBinding
@@ -17,7 +19,7 @@ class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    lateinit var binding: MainFragmentBinding
+    private lateinit var binding: MainFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,24 +38,32 @@ class MainFragment : Fragment() {
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.navigate.collect { navTarget ->
-                when (navTarget) {
-                    is MainViewModel.NavigationTarget.ImageScreen -> {
-                        val action = MainFragmentDirections.actionMainFragmentToImageFragment()
-                            .setImageUrl(navTarget.url)
-                        NavHostFragment.findNavController(this@MainFragment)
-                            .navigate(action)
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.navigate.collect { navTarget ->
+                    when (navTarget) {
+                        is MainViewModel.NavigationTarget.ImageScreen -> {
+                            val action = MainFragmentDirections.actionMainFragmentToImageFragment()
+                                .setImageUrl(navTarget.url)
+                            NavHostFragment.findNavController(this@MainFragment)
+                                .navigate(action)
+                        }
+
+                        else -> {}
                     }
-                    else -> {}
+                    viewModel.onNavigationObserved()
                 }
-                viewModel.onNavigationObserved()
             }
         }
-        lifecycleScope.launchWhenStarted {
-            viewModel.loadingIsVisible.collect { isLoadingVisible ->
-                binding.loadingView.visibility = if (isLoadingVisible) View.VISIBLE else View.GONE
-                binding.imageButton.visibility = if (isLoadingVisible) View.GONE else View.VISIBLE
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.loadingIsVisible.collect { isLoadingVisible ->
+                    binding.loadingView.visibility =
+                        if (isLoadingVisible) View.VISIBLE else View.GONE
+                    binding.imageButton.visibility =
+                        if (isLoadingVisible) View.GONE else View.VISIBLE
+                }
             }
         }
     }
