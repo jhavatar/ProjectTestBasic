@@ -115,6 +115,9 @@ dependencies {
     implementation libs.okhttp.logging.interceptor
     implementation libs.bundles.ktor.client
 
+    // settings
+    implementation libs.tweaks
+
     // test
     testImplementation libs.junit
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

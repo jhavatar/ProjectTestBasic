@@ -19,6 +19,7 @@ class MainViewModel @Inject constructor(
 
     sealed class NavigationTarget {
         data class ImageScreen(val url: String) : NavigationTarget()
+        object SettingsScreen : NavigationTarget()
     }
 
     private val _loadingIsVisible = MutableStateFlow(false)
@@ -49,5 +50,9 @@ class MainViewModel @Inject constructor(
                 Timber.e(e, "getDogImageUsecase failed")
             }
         }
+    }
+
+    fun onSettingsButtonClicked() {
+        _navigate.value = NavigationTarget.SettingsScreen
     }
 }

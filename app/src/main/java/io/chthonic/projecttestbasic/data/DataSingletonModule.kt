@@ -6,8 +6,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.chthonic.projecttestbasic.data.config.LocalConfig
-import io.chthonic.projecttestbasic.domain.DogImageRepository
+import io.chthonic.projecttestbasic.data.config.LocalConfigImpl
+import io.chthonic.projecttestbasic.domain.DogImageRepositoryFactory
+import io.chthonic.projecttestbasic.domain.config.LocalConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -88,11 +89,12 @@ internal class DataSingletonModule {
     }
 
     @Provides
-    fun provideDogImageRepository(
-        ktorImpl: KtorDogImageRepository,
-        retrofitImpl: RetrofitDogImageRepository
-    ): DogImageRepository = when (LocalConfig.httpClient) {
-        LocalConfig.HttpClient.KTOR -> ktorImpl
-        LocalConfig.HttpClient.RETROFIT -> retrofitImpl
-    }
+    fun provideDogImageRepositoryFactory(
+        impl: DogImageRepositoryFactoryImpl,
+    ): DogImageRepositoryFactory = impl
+
+    @Provides
+    fun provideLocalConfig(
+        impl: LocalConfigImpl,
+    ): LocalConfig = impl
 }

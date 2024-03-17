@@ -1,3 +1,4 @@
 <resources>
     <string name="dog_button">Fetch dog image</string>
+    <string name="settings_button">Settings</string>
 </resources>
