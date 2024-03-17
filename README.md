@@ -1,2 +1,2 @@
 # Basic Test Project
-Basic app with either compose or fragment ui depending on flavor (`composed` / `fragment`).
+Basic app, with either compose or fragment ui depending on flavor (`composed` / `fragment`), used to test stuff.
