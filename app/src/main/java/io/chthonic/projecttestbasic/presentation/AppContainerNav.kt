@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.telefonica.tweaks.addTweakGraph
 import io.chthonic.projecttestbasic.presentation.image.ImageScreen
 import io.chthonic.projecttestbasic.presentation.main.MainScreen
 
@@ -21,6 +22,9 @@ fun AppContainerNavHost(
         MainScreen(navController = appContainerState.navController)
     }
     composable(Destination.Image.route) { ImageScreen() }
+    addTweakGraph(
+        navController = appContainerState.navController,
+    )
 }
 
 sealed class Destination(val route: String) {

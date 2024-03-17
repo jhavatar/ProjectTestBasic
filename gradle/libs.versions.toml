@@ -18,6 +18,7 @@ appcompat = "1.6.1"
 material = "1.11.0"
 constraintlayout = "2.1.4"
 fragment = "1.6.2"
+tweaks = "3.1.0"
 
 [libraries]
 # android
@@ -78,6 +79,9 @@ viewmodel-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", ver
 # image
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+# settings
+tweaks = { module = "com.telefonica:tweaks", version.ref = "tweaks" }
 
 # testing
 junit = { module = "junit:junit", version.ref = "junit" }
